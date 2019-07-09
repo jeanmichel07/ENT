@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <h3 class="text-success" align="center">Liste des Employées</h3>
+       <table class="table table-hover">
+       <thead>
+       <tr>
+           <th scope="col">Nom</th>
+           <th scope="col">Poste</th>
+           <th scope="col">Departement</th>
+           <th scope="col">N° Matricule</th>
+           <th scope="col">Action</th>
+       </tr>
+    {% for e in employe %}
+       </thead>
+       <tbody>
+       <tr class="table-active">
+           <td >{{ e.nom }}</td>
+           <td>{{ e.poste }}</td>
+           <td>{{ e.departement }}</td>
+           <td>{{ e.numMatricule }}</td>
+           <td><input type="submit" value="Voir" class="btn btn-info">
+               <input type="submit" value="Modifier" class="btn btn-success">
+               <input type="submit" value="Supprimer" class="btn btn-danger"></td>
+       </tr>
+    {% endfor %}
+{% endblock %}
