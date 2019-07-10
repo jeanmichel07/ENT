@@ -51,6 +51,10 @@ class EmployeController extends AbstractController
      * @Route("/new/employe", name="new_employe")
      */
     public  function create(Request $request){
+        $session=$request->getSession();
+
+
+
         $employe=new Employe();
         $form=$this->createFormBuilder($employe)
         ->add('departement',EntityType::class,[
@@ -77,6 +81,8 @@ class EmployeController extends AbstractController
     $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $pass=sha1($request->get('password'));
+            $employe->setPassword($pass);
             $em=$this->getDoctrine()->getManager();
             $em->persist($employe);
             $em->flush();

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <table>
+      {{ form_start(form) }}
+       {{ form_row(form.username) }}
+       {{ form_row(form.password) }}
+       <input type="submit" value="Se connecter">
+      {{ form_end(form) }}
+   </table>
+</body>
+</html>
