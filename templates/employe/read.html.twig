@@ -2,6 +2,7 @@
 {% block body %}
 
     <h3 class="text-success" align="center">Liste des Employées</h3>
+    <a type="submit" href="{{ path('new_employe') }}" class="btn btn-success">Nouveau</a>
        <table class="table table-hover">
        <thead>
        <tr>
@@ -20,7 +21,7 @@
            <td>{{ e.departement }}</td>
            <td>{{ e.numMatricule }}</td>
            <td><input type="submit" value="Voir" class="btn btn-info">
-               <input type="submit" value="Modifier" class="btn btn-success">
+               <a type="submit" href="{{ path('employe_edit',{id:e.id}) }}" class="btn btn-success">Modifier</a>
                <input type="submit" value="Supprimer" class="btn btn-danger"></td>
        </tr>
     {% endfor %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <h2 >MODIFIER L'EMPLOYER</h2>
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.departement) }}
+    {{ form_row(form.poste) }}
+    {{ form_row(form.num_matricule) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.password) }}
+    <input type="submit" value="Enregistrer" class="btn btn-primary btn-lg btn-block">
+    {{ form_end(form) }}
+{% endblock %}

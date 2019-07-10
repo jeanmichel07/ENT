@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Departement;
+use App\Repository\DepartementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +12,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DepartementController extends AbstractController
 {
+    /**
+     * @var DepartementRepository
+     */
+    private $departementRepositiry;
+
+    public function __construct(DepartementRepository $departementRepositiry)
+    {
+
+        $this->departementRepositiry = $departementRepositiry;
+    }
+
     /**
      * @Route("/departement", name="departement")
      */
@@ -23,25 +36,61 @@ class DepartementController extends AbstractController
     /**
      * @param Request $request
      * @return Response
-     * @Route("/new",name="departement_new",methods={"GET","POST"})
+     * @Route("/departement/nouveau",name="departement_new",methods={"GET","POST"})
      */
-    public function create(Request $request):Response
+    public function create(Request $request)
     {
         $departement=new Departement();
-        $form = $this->createForm(DepartementType::class,$departement);
+        $form=$this->createFormBuilder($departement)
+            ->add('nom_dep')
+            ->add('description')
+            ->getForm();
         $form->handleRequest($request);
-
-        if ($form->isSubmitted()&& $form->isValid()){
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($departement);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('');
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($departement);
+            $em->flush();
+            return $this->redirectToRoute('liste_departement');
+            
         }
-       return $this->render('departement/nouveau.html.twig',[
-           'departement'=>$departement,
-           'form'=>$form->createView(),
-       ]);
+        return $this->render('departement/nouveau.html.twig',[
+            'form'=>$form->createView()
+        ]);
+
     }
 
-}
+    /**
+     * @return Response
+     * @Route("/liste/departement",name="liste_departement")
+     */
+    public function liste(){
+        $departement=$this->departementRepositiry->findDepartement();
+        return $this->render('departement/liste.html.twig',[
+            'departement'=>$departement
+        ]);
+    }
+    /**
+     * @Route("/departement/update/{id}", name="departement_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Departement $departement): Response
+    {
+
+        $form=$this->createFormBuilder($departement)
+            ->add('nom_dep')
+            ->add('description')
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($departement);
+            $em->flush();
+            return $this->redirectToRoute('liste_departement');
+
+        }
+        return $this->render('departement/update.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
+
+
+    }

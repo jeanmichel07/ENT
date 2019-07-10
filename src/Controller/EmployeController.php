@@ -97,5 +97,45 @@ class EmployeController extends AbstractController
          'employe'=>$employe
      ]);
     }
+    /**
+     * @Route("/employe/update/{id}", name="employe_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Employe $employe): Response
+    {
+
+        $form=$this->createFormBuilder($employe)
+            ->add('departement',EntityType::class,[
+                'class'=>Departement::class,
+                'query_builder'=>function(EntityRepository $entityRepository){
+                    return $entityRepository->createQueryBuilder('d')->orderBy('d.nom_dep','ASC');
+
+                }
+
+            ])
+            ->add('poste',EntityType::class,[
+                'class'=>Poste::class,
+                'query_builder'=>function(EntityRepository $entityRepository){
+                    return $entityRepository->createQueryBuilder('p')->orderBy('p.nom_poste','ASC');
+
+                }
+
+            ])
+            ->add('nom')
+            ->add('num_matricule')
+            ->add('username')
+            ->add('password')
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($employe);
+            $em->flush();
+            return $this->redirectToRoute('read_employe');
+        }
+        return $this->render('employe/edit.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
 
 }

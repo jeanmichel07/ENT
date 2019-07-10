@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <h3 class="text-success" align="center">Liste des Departement</h3>
+    <a type="submit" href="{{ path('departement_new') }}" class="btn btn-success">Nouveau</a>
+    <table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Action</th>
+    </tr>
+    {% for d in departement %}
+    </thead>
+    <tbody>
+    <tr class="table-active">
+        <td >{{ d.nomDep }}</td>
+        <td> <a type="submit" href="{{ path('departement_edit',{id:d.id}) }}" class="btn btn-success">Modifier</a>
+            <input type="submit" value="Supprimer" class="btn btn-danger"></td>
+    </tr>
+    {% endfor %}
+{% endblock %}

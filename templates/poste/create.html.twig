@@ -1,1 +1,10 @@
 {% extends 'base.html.twig' %}
+{% block body %}
+
+    <h2 >INSERER NOUVELLE EMPLOYER</h2>
+    {{ form_start(form) }}
+    {{ form_row(form.nom_poste) }}
+
+    <input type="submit" value="Enregistrer" class="btn btn-primary btn-lg btn-block">
+    {{ form_end(form) }}
+{% endblock %}

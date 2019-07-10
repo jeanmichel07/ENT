@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <h2 >MODIFIER LE DEPARTEMENT</h2>
+    {{ form_start(form) }}
+    {{ form_row(form.nom_dep) }}
+    {{ form_row(form.description) }}
+    <input type="submit" value="Enregistrer" class="btn btn-primary btn-lg btn-block">
+    {{ form_end(form) }}
+{% endblock %}
