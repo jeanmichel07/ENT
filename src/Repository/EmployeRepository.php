@@ -27,6 +27,18 @@ class EmployeRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findemp($username,$password)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.username = :username')
+            ->andWhere('e.password = :password')
+            ->setParameter('username', $username)
+            ->setParameter('password', sha1($password))
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Employe[] Returns an array of Employe objects
     //  */

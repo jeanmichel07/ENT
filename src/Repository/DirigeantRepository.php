@@ -18,14 +18,13 @@ class DirigeantRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Dirigeant::class);
     }
-    public function findDiri($username, $password)
+    public function findDiri($username,$password)
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.username = :username')
             ->andWhere('d.password = :password')
             ->setParameter('username', $username)
-            ->setParameter('password', $password)
-            ->setMaxResults(1)
+            ->setParameter('password', sha1($password))
             ->getQuery()
             ->getResult()
             ;
