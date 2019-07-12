@@ -11,7 +11,10 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,11 +24,16 @@ class EmployeController extends AbstractController
      * @var EmployeRepository
      */
     private $employeRepository;
+    /**
+     * @var SessionInterface
+     */
+    private $session;
 
-    public function __construct(EmployeRepository $employeRepository)
+    public function __construct(EmployeRepository $employeRepository, SessionInterface $session)
     {
 
         $this->employeRepository = $employeRepository;
+        $this->session = $session;
     }
 
     /**
@@ -51,6 +59,7 @@ class EmployeController extends AbstractController
      * @Route("/new/employe", name="new_employe")
      */
     public  function create(Request $request){
+
         $employe=new Employe();
         $form=$this->createFormBuilder($employe)
         ->add('departement',EntityType::class,[
@@ -77,6 +86,8 @@ class EmployeController extends AbstractController
     $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $pass=sha1($employe->getPassword());
+            $employe->setPassword($pass);
             $em=$this->getDoctrine()->getManager();
             $em->persist($employe);
             $em->flush();
@@ -88,10 +99,67 @@ class EmployeController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route("/login/employe", name="login_employe")
+     */
+    public function loginEmploye(Request $request)
+    {
+        $formLogin=$this->createFormBuilder()
+            ->add('username',TextType::class,[
+                'label'=>' ',
+                'attr'=>[
+                    'placeholder'=>'Utilisateur'
+                ]
+            ])
+            ->add('password',PasswordType::class,[
+                'label'=>' ',
+                'attr'=>[
+                    'placeholder'=>'Mot de passe'
+                ]
+            ])
+            ->getForm();
+
+        $formLogin->handleRequest($request);
+
+        if($formLogin->isSubmitted() && $formLogin->isValid())
+        {
+            $username=$request->request->get("form")['username'];
+            $password=$request->request->get("form")['password'];
+            $dirigean=$this->employeRepository->findemp($username,$password);
+            if(count($dirigean)===1){
+                $session=$this->session;
+                $session->set('username_employe',$username);
+                $sessUsername=$session->get('username');
+                    return $this->redirectToRoute('employe_accueil');
+            }else{
+                $erro="Username ou mot de passe incorrect";
+                return $this->render('employe/login.html.twig', [
+                    'form'=>$formLogin->createView(),
+                    'err'=>$erro
+                ]);
+            }
+
+        }
+
+        return $this->render('employe/login.html.twig', [
+            'form'=>$formLogin->createView()
+        ]);
+    }
+    /**
+     * @Route("/lougout/employe", name="logoutemploue")
+     */
+    public function logout(){
+        $this->session->clear();
+        return $this->redirectToRoute('user');
+    }
+
+    /**
      * @return Response
      * @Route("/read/employe",name="read_employe")
      */
     public  function read(){
+     dump($this->session->get('username_dirigeant'));
      $employe=$this->employeRepository->findEmploye();
      return $this->render('employe/read.html.twig',[
          'employe'=>$employe
@@ -139,6 +207,7 @@ class EmployeController extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @param Employe $employe
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/read/employe/{id}",name="employe_delete")
@@ -164,4 +233,15 @@ class EmployeController extends AbstractController
         ]);
 
     }
+=======
+     * @Route("/accueil/employe", name="employe_accueil")
+     * @param Request $request
+     * @return Response
+     */
+    public function accueil(Request $request)
+    {
+        return $this->render('employe/accueil.html.twig');
+    }
+
+>>>>>>> 36bbe71758d047ba67db93056dbea1e1e8140230
 }

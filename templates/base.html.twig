@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <title>{% block title %}nl_ent|acceuil{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">NL_ENT</a>
 
@@ -31,20 +32,72 @@
                 </li>
 
             </ul>
+=======
+    {% if app.session.get('username_dirigeant') %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Dirigeant</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+>>>>>>> 36bbe71758d047ba67db93056dbea1e1e8140230
 
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Employés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Discussion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Congés</a>
+                    </li>
+                </ul>
+                    <a href="{{ path('logout') }}" class="btn btn-primary">Deconnexion ({{ app.session.get('username_dirigeant') }})</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="div1">
+                {% block body %}
+                {% endblock %}
+            </div>
         </div>
-    </nav>
-    <div class="container">
+    {% elseif app.session.get('username_employe') %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        {% block body %}
-
-            <!--entête------------------------------------------------------------------------->
-
-            <!--fin entete------------------------------------------------------------------------->
-
-        {% endblock %}
-
-    </div>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <a href="{{ path('logoutemploue') }}" class="btn btn-primary">Deconnexter</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="div2">
+                {{ block('body') }}
+            </div>
+        </div>
+    {% else %}
+        <script>window.location="/"</script>
+    {% endif %}
 
         {% block javascripts %}{% endblock %}
     </body>
