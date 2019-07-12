@@ -48,8 +48,18 @@ class DirigeantController extends AbstractController
     {
 
         $formLogin=$this->createFormBuilder()
-        ->add('username',TextType::class)
-        ->add('password',PasswordType::class)
+        ->add('username',TextType::class,[
+            'label'=>' ',
+            'attr'=>[
+                'placeholder'=>'Utilisateur'
+            ]
+        ])
+        ->add('password',PasswordType::class,[
+        'label'=>' ',
+            'attr'=>[
+        'placeholder'=>'Mot de passe'
+    ]
+            ])
         ->getForm();
 
         $formLogin->handleRequest($request);
@@ -108,9 +118,24 @@ class DirigeantController extends AbstractController
     {
         $dirigean=new Dirigeant();
         $form=$this->createFormBuilder($dirigean)
-            ->add('nom')
-            ->add('username')
-            ->add('password',PasswordType::class)
+            ->add('nom',TextType::class,[
+                'label'=>' ',
+                'attr'=>[
+                    'placeholder'=>'Nom'
+                ]
+            ])
+            ->add('username',TextType::class,[
+                'label'=>' ',
+                'attr'=>[
+                    'placeholder'=>'Utilisateur'
+                ]
+            ])
+            ->add('password',PasswordType::class,[
+                'label'=>' ',
+                'attr'=>[
+                    'placeholder'=>'Mot de passe'
+                ]
+            ])
             ->getForm();
 
         $form->handleRequest($request);

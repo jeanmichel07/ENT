@@ -5,20 +5,123 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Nouveaux dirigeant</title>
 </head>
+<style>
+    @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+    body{
+        font-family: Arial;
+    }
+    section{
+        width: 100%;
+        height: 100vh;
+        background-image: url("http://localhost/ENT/public/images/bg1.jpg");
+        background-size: cover;
+        margin-top: -40px;
+        padding: 0;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    .box{
+        left: 50%;
+        top: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        background: #262626;
+        padding: 10px 10px 80px 10px;
+        text-align: center;
+        border-radius: 20px;
+        width: 350px;
+    }
+    img{
+        width: 130px;
+        height: 130px;
+        border: 5px solid #ffffff;
+        border-radius: 50%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background: dodgerblue;
+    }
+    .box .input-container{
+        display: flex;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .box .input-container .icon{
+        padding: 10px;
+        background: #3b91b2;
+        color: white;
+        min-width: 50px;
+        text-align: center;
+    }
+     .input-field{
+        width: 100%;
+        padding: 10px;
+        outline: none;
+        font-size: 20px;
+        background: #ffffff;
+    }
+    .input-field:focus{
+        border: 2px solid #3b91b2;
+    }
+    .btn{
+        background: #3b91b2;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+    .btn:hover{
+        background: none;
+        color: white;
+        padding: 15px 20px;
+        border: 2px solid #3b91b2;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+</style>
 <body>
-<h2>Nouveaux dirigeant</h2>
+
 
     {% if err is defined %}
         {{ err }}
     {% endif %}
+    <section>
+    <div class="box">
+        {{ form_start(form) }}
+            <img src="http://localhost/ENT/public/images/avatar.png">
+            <div class="input-container">
+                <i class="fa fa-user icon"></i>
+                <div style="text-decoration: none" >
+                    {{ form_row(form.nom) }}
+                </div>
+            </div>
+            <div class="input-container">
+                <i class="fa fa-user icon"></i>
+                <div >
+                    {{ form_row(form.username) }}
+                </div>
+            </div>
+            <div class="input-container">
+                <i class="fa fa-key icon"></i>
+                <div >
+                    {{ form_row(form.password) }}
+                </div>
+            </div>
+            <input type="submit" value="S'inscrire" class="btn">
+        {{ form_end(form) }}
+    </div>
+    </section>
 
-    {{ form_start(form) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.password) }}
-<input type="submit" value="S'inscrire" class="btn btn-primary">
-    {{ form_end(form) }}
+
+
+
+
+
+
 </body>
 </html>
