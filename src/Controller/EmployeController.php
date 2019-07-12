@@ -106,8 +106,18 @@ class EmployeController extends AbstractController
     public function loginEmploye(Request $request)
     {
         $formLogin=$this->createFormBuilder()
-            ->add('username',TextType::class)
-            ->add('password',PasswordType::class)
+            ->add('username',TextType::class,[
+                'label'=>' ',
+                'attr'=>[
+                    'placeholder'=>'Utilisateur'
+                ]
+            ])
+            ->add('password',PasswordType::class,[
+                'label'=>' ',
+                'attr'=>[
+                    'placeholder'=>'Mot de passe'
+                ]
+            ])
             ->getForm();
 
         $formLogin->handleRequest($request);
