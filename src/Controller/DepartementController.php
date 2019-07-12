@@ -92,5 +92,18 @@ class DepartementController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Departement $departement
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/liste/departement/{id}",name="departement_delete")
+     */
+    public function delete(Departement $departement){
+            if (isset($departement)){
+                $em=$this->getDoctrine()->getManager();
+                $em->remove($departement);
+                $em->flush();
+                return $this->redirectToRoute('liste_departement');
+            }
 
     }
+ }

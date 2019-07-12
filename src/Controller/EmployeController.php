@@ -138,4 +138,30 @@ class EmployeController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/read/employe/{id}",name="employe_delete")
+     */
+    public function delete(Employe $employe){
+        if (isset($employe)){
+            $em=$this->getDoctrine()->getManager();
+            $em->remove($employe);
+            $em->flush();
+            return $this->redirectToRoute('read_employe');
+        }
+
+    }
+
+    /**
+     * @param Employe $employe
+     * @return Response
+     * @Route("voir/employe/{id}",name="employe_voir")
+     */
+    public function voir(Employe $employe){
+        return $this->render('employe/voir.html.twig',[
+            'e'=>$employe
+        ]);
+
+    }
 }

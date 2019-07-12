@@ -20,9 +20,9 @@
            <td>{{ e.poste }}</td>
            <td>{{ e.departement }}</td>
            <td>{{ e.numMatricule }}</td>
-           <td><input type="submit" value="Voir" class="btn btn-info">
+           <td><a type="submit"  href="{{ path('employe_voir',{id:e.id}) }}" class="btn btn-info">Voir</a>
                <a type="submit" href="{{ path('employe_edit',{id:e.id}) }}" class="btn btn-success">Modifier</a>
-               <input type="submit" value="Supprimer" class="btn btn-danger"></td>
+               <a type="submit" href="{{ path('employe_delete',{id:e.id}) }}" class="btn btn-danger">Supprimer</a>
        </tr>
     {% endfor %}
 {% endblock %}
