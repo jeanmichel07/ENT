@@ -121,9 +121,7 @@ class EmployeController extends AbstractController
                 $session=$this->session;
                 $session->set('username_employe',$username);
                 $sessUsername=$session->get('username');
-                if(!empty($sessUsername)){
                     return $this->redirectToRoute('employe_accueil');
-                }
             }else{
                 $erro="Username ou mot de passe incorrect";
                 return $this->render('employe/login.html.twig', [
@@ -137,6 +135,13 @@ class EmployeController extends AbstractController
         return $this->render('employe/login.html.twig', [
             'form'=>$formLogin->createView()
         ]);
+    }
+    /**
+     * @Route("/lougout/employe", name="logoutemploue")
+     */
+    public function logout(){
+        $this->session->clear();
+        return $this->redirectToRoute('user');
     }
 
     /**
