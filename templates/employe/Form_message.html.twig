@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <h2 >INSERER NOUVELLE EMPLOYER</h2>
+    {{ form_start(form) }}
+    {{ form_row(form.contenu) }}
+    <input type="submit" value="Envoyer" class="btn btn-primary btn-lg btn-block">
+    {{ form_end(form) }}
+{% endblock %}

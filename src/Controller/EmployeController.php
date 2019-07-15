@@ -207,7 +207,6 @@ class EmployeController extends AbstractController
     }
 
     /**
-<<<<<<< HEAD
      * @param Employe $employe
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/read/employe/{id}",name="employe_delete")
@@ -233,8 +232,8 @@ class EmployeController extends AbstractController
         ]);
 
     }
-=======
-     * @Route("/accueil/employe", name="employe_accueil")
+
+     /* @Route("/accueil/employe", name="employe_accueil")
      * @param Request $request
      * @return Response
      */
@@ -243,5 +242,28 @@ class EmployeController extends AbstractController
         return $this->render('employe/accueil.html.twig');
     }
 
->>>>>>> 36bbe71758d047ba67db93056dbea1e1e8140230
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route("message/employe/{id}",name="envoye_message", methods={"GET","POST"})
+     */
+    public function message(Request $request){
+        $form=$this->createFormBuilder()
+            ->add('nom')
+
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em=$this->getDoctrine()->getManager();
+            $em->persist();
+            $em->flush();
+            return $this->redirectToRoute('accueil');
+        }
+        return $this->render('employe/Form_message.html.twig',[
+            'form'=>$form->createView()
+        ]);
+
+    }
+
 }
