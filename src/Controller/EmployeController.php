@@ -159,7 +159,6 @@ class EmployeController extends AbstractController
      * @Route("/read/employe",name="read_employe")
      */
     public  function read(){
-     dump($this->session->get('username_dirigeant'));
      $employe=$this->employeRepository->findEmploye();
      return $this->render('employe/read.html.twig',[
          'employe'=>$employe
@@ -233,15 +232,21 @@ class EmployeController extends AbstractController
 
     }
 
+<<<<<<< HEAD
      /* @Route("/accueil/employe", name="employe_accueil")
+=======
+    /**
+>>>>>>> 3d28ce3b25c904a02db44bd2309410059547240e
      * @param Request $request
      * @return Response
+     * @Route("/acceuil/employe",name="employe_accueil")
      */
     public function accueil(Request $request)
     {
         return $this->render('employe/accueil.html.twig');
     }
 
+<<<<<<< HEAD
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -266,4 +271,6 @@ class EmployeController extends AbstractController
 
     }
 
+=======
+>>>>>>> 3d28ce3b25c904a02db44bd2309410059547240e
 }
