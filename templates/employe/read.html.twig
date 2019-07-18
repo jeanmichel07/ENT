@@ -1,28 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-    <h3 class="text-success" align="center">Liste des Employées</h3>
-    <a type="submit" href="{{ path('new_employe') }}" class="btn btn-success">Nouveau</a>
-       <table class="table table-hover">
-       <thead>
-       <tr>
-           <th scope="col">Nom</th>
-           <th scope="col">Poste</th>
-           <th scope="col">Departement</th>
-           <th scope="col">N° Matricule</th>
-           <th scope="col">Action</th>
-       </tr>
-    {% for e in employe %}
+
+      <h3 class="text-success" align="center">Liste des Employées</h3>
+      <a type="submit" href="{{ path('new_employe') }}" class="btn btn-success">Nouveau</a>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+             <th scope="col">Nom</th>
+             <th scope="col">Poste</th>
+             <th scope="col">Departement</th>
+             <th scope="col">N° Matricule</th>
+             <th scope="col">Action</th>
+         </tr>
+      {% for e in employe %}
        </thead>
        <tbody>
-       <tr class="table-active">
-           <td >{{ e.nom }}</td>
-           <td>{{ e.poste }}</td>
-           <td>{{ e.departement }}</td>
-           <td>{{ e.numMatricule }}</td>
-           <td><a type="submit"  href="{{ path('employe_voir',{id:e.id}) }}" class="btn btn-info">Voir</a>
-               <a type="submit" href="{{ path('employe_edit',{id:e.id}) }}" class="btn btn-success">Modifier</a>
-               <a type="submit" href="{{ path('employe_delete',{id:e.id}) }}" class="btn btn-danger">Supprimer</a>
-       </tr>
+           <tr class="table-active">
+               <td >{{ e.nom }}</td>
+               <td>{{ e.poste }}</td>
+               <td>{{ e.departement }}</td>
+               <td>{{ e.numMatricule }}</td>
+               <td><a type="submit"  href="{{ path('employe_voir',{id:e.id}) }}" class="btn btn-info">Voir</a>
+                   <a type="submit" href="{{ path('employe_edit',{id:e.id}) }}" class="btn btn-success">Modifier</a>
+                   <a type="submit" href="{{ path('employe_delete',{id:e.id}) }}" class="btn btn-danger">Supprimer</a>
+               </td>
+           </tr>
+        </tbody>
+      </table>
     {% endfor %}
+    
+
+    
 {% endblock %}

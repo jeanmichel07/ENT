@@ -137,14 +137,6 @@ ul.CTAs a{
     background:#000;
     color: #fff;
 }
-
-#content{
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-}
-
 @media(maz-width: 768px){
     #sidebar{margin-left: -250px;}
     #sidebar .active{
@@ -158,10 +150,10 @@ ul.CTAs a{
 
 
     </style>
-    <body>
+    <body class="wrapper">
 
     {% if app.session.get('username_dirigeant') %}
-            <div class="wrapper">
+            <div >
             <nav id="sidebar">
                 <div class="sidebar-header">
                     <h3 style="text-align: center;">DIRIGEANT</h3>
@@ -171,7 +163,10 @@ ul.CTAs a{
 
                 <ul class="list-unstyled components">
                     <p style="color:#fff;">NL Technologie</p>
-                    <li class="active">
+                    <li  class="active" >
+                        <a href=""><span class="fa fa-home"></span>Accueil</a>
+                    </li>
+                    <li >
                         <a href="{{ path('read_employe') }}"><span class="fa fa-users"></span>Employé</a>
                     </li>
                     <li>
@@ -238,23 +233,6 @@ ul.CTAs a{
                     </li>
                 </ul>
             </nav>  
-
-            <div class="content">
-                <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
-
-                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="margin-left: 10px;">
-                        <i class="fa fa-align-justify"></i><span>MENU</span>
-                    </button>   
-
-                    <!--<a class="navbar-brand" href="#">Navbar</a> -->
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>       
-                </nav>      
-                <div class="line">      
-                </div>
-
-            </div>
         </div>
         <div class="container">
             <div class="div1">
