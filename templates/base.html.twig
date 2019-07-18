@@ -4,13 +4,12 @@
         <meta charset="UTF-8">
         <title>{% block title %}nl_ent|Dirigeant{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-<<<<<<< HEAD
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-=======
+
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
->>>>>>> cd71c50471812fd48850ca612489f2b3eb4eb11a
-        {% block stylesheets %}{% endblock %}
+
     </head>
     <style>
         @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
@@ -173,9 +172,8 @@ ul.CTAs a{
                 <ul class="list-unstyled components">
                     <p style="color:#fff;">NL Technologie</p>
                     <li class="active">
-                        <a href="#"><span class="fa fa-users"></span>Employé</a>
+                        <a href="{{ path('read_employe') }}"><span class="fa fa-users"></span>Employé</a>
                     </li>
-<<<<<<< HEAD
                     <li>
                         <a href="#homeSubmenu" data-toggle=collapse aria-expanded="false" class="dropdown-toggle"><span class="fa fa-list-alt"></span>Présence</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -204,17 +202,7 @@ ul.CTAs a{
                                 <a href="#"><span class="fa fa-pie-chart"></span>Mensuel</a>
                             </li>
                         </ul>
-=======
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Présence</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('read_employe') }}">Employé</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Rapport d'activité</a>
->>>>>>> cd71c50471812fd48850ca612489f2b3eb4eb11a
-                    </li>
+                   
 
                     <li>
                         <a href="#congeSubmenu" data-toggle=collapse aria-expanded="false" class="dropdown-toggle"><span class="fa fa-calendar"></span>Congé</a>
@@ -238,14 +226,8 @@ ul.CTAs a{
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Discussion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Compte</a>
-                    </li>
                 </ul>
-<<<<<<< HEAD
+
 
                 <ul class="list-unstyled CTAs" style="text-align: center; font-size: 20px">
                     <li>
@@ -271,9 +253,7 @@ ul.CTAs a{
                 </nav>      
                 <div class="line">      
                 </div>
-=======
-                    <a href="{{ path('logout') }}" class="btn btn-primary">Deconnexion ({{ app.session.get('username_dirigeant') }})</a>
->>>>>>> cd71c50471812fd48850ca612489f2b3eb4eb11a
+
             </div>
         </div>
         <div class="container">
