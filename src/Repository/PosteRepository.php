@@ -18,6 +18,14 @@ class PosteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Poste::class);
     }
+    public function findPoste()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     // /**
     //  * @return Poste[] Returns an array of Poste objects

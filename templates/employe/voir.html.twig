@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+        <br>
+        <div class="ol-sm-3">
+
+        </div>
+        <center>
+            <div class="col-sm-6" align="left" style="background-color: #C0C0C0; padding: 25px 20px 20px 30px">
+
+                <div class="rec">
+
+                    <b><p class="text-primary" align="center"><strong>Coordonnée de {{ e.nom }}</strong></p></b>
+                    <hr>
+                    <b>Poste:</b><br>
+                    {{ e.poste }}<br>
+                    <hr>
+                    <b>Departement:</b><br>
+                    {{ e.departement }}<br>
+
+                    <hr>
+                    <b>N° Matricule:</b><br>
+                    {{ e.numMatricule }}<br>
+                    <hr>
+
+                </div>
+                <br>
+                <br>
+                <div>
+                    <a href="{{ path('read_employe') }}" class="btn btn-info">OK</a><br>
+                </div>
+            </div>
+        </center>
+
+        <div class="col-sm-3">
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+

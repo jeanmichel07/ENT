@@ -131,9 +131,7 @@ class EmployeController extends AbstractController
                 $session=$this->session;
                 $session->set('username_employe',$username);
                 $sessUsername=$session->get('username');
-                if(!empty($sessUsername)){
                     return $this->redirectToRoute('employe_accueil');
-                }
             }else{
                 $erro="Username ou mot de passe incorrect";
                 return $this->render('employe/login.html.twig', [
@@ -148,27 +146,108 @@ class EmployeController extends AbstractController
             'form'=>$formLogin->createView()
         ]);
     }
+    /**
+     * @Route("/lougout/employe", name="logoutemploue")
+     */
+    public function logout(){
+        $this->session->clear();
+        return $this->redirectToRoute('user');
+    }
 
     /**
      * @return Response
      * @Route("/read/employe",name="read_employe")
      */
     public  function read(){
-     dump($this->session->get('username_dirigeant'));
      $employe=$this->employeRepository->findEmploye();
      return $this->render('employe/read.html.twig',[
          'employe'=>$employe
      ]);
     }
+    /**
+     * @Route("/employe/update/{id}", name="employe_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Employe $employe): Response
+    {
+
+        $form=$this->createFormBuilder($employe)
+            ->add('departement',EntityType::class,[
+                'class'=>Departement::class,
+                'query_builder'=>function(EntityRepository $entityRepository){
+                    return $entityRepository->createQueryBuilder('d')->orderBy('d.nom_dep','ASC');
+
+                }
+
+            ])
+            ->add('poste',EntityType::class,[
+                'class'=>Poste::class,
+                'query_builder'=>function(EntityRepository $entityRepository){
+                    return $entityRepository->createQueryBuilder('p')->orderBy('p.nom_poste','ASC');
+
+                }
+
+            ])
+            ->add('nom')
+            ->add('num_matricule')
+            ->add('username')
+            ->add('password')
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($employe);
+            $em->flush();
+            return $this->redirectToRoute('read_employe');
+        }
+        return $this->render('employe/edit.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
 
     /**
-     * @Route("/accueil/employe", name="employe_accueil")
+     * @param Employe $employe
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/read/employe/{id}",name="employe_delete")
+     */
+    public function delete(Employe $employe){
+        if (isset($employe)){
+            $em=$this->getDoctrine()->getManager();
+            $em->remove($employe);
+            $em->flush();
+            return $this->redirectToRoute('read_employe');
+        }
+
+    }
+
+    /**
+     * @param Employe $employe
+     * @return Response
+     * @Route("voir/employe/{id}",name="employe_voir")
+     */
+    public function voir(Employe $employe){
+        return $this->render('employe/voir.html.twig',[
+            'e'=>$employe
+        ]);
+
+    }
+
+     /**
      * @param Request $request
      * @return Response
+     * @Route("/acceuil/employe",name="employe_accueil")
      */
     public function accueil(Request $request)
     {
         return $this->render('employe/accueil.html.twig');
     }
 
+    /**
+    * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route("message/employe/{id}",name="envoye_message")
+     */
+   public function message(Request $request){
+
+   }
 }

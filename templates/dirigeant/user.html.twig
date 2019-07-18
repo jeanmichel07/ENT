@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ENT NL Technologie</title>
 </head>
@@ -12,7 +13,7 @@
         margin:0;
         padding: 0;
         font-family: sans-serif;
-        background-image: url("http://localhost/ENT/public/images/bg1.jpg");
+        background-image: url("/public/images/bg1.jpg");
         background-size: cover;
 
     }
@@ -59,17 +60,17 @@
         text-align: center;
 
     }
+    .btn{
+        width: 200px;
+    }
 </style>
 <body>
     <div class="login-box">
         <h1>ENT NL TECHNOLOGIE</h1>
-        <button>
-            <a href="{{ path('login_dirigeant') }}">ADMIN</a>
-        </button>
-
-        <button>
-            <a href="{{ path('login_employe') }}">EMPLOYE</a>
-        </button>
+        <table align="center">
+            <tr><td><a href="{{ path('login_dirigeant') }}" class="btn btn-warning btn-lg">ADMIN</a></td></tr>
+            <tr><td><a href="{{ path('login_employe') }}" class="btn btn-warning btn-lg">EMPLOYE</a></td></tr>
+        </table>
     </div>
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,22 @@ class Employe
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="id_envoye")
+     */
+    private $id_recepeteur;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="id_recepteur")
+     */
+    private $messages;
+
+    public function __construct()
+    {
+        $this->id_recepeteur = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +137,68 @@ class Employe
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getIdRecepeteur(): Collection
+    {
+        return $this->id_recepeteur;
+    }
+
+    public function addIdRecepeteur(Message $idRecepeteur): self
+    {
+        if (!$this->id_recepeteur->contains($idRecepeteur)) {
+            $this->id_recepeteur[] = $idRecepeteur;
+            $idRecepeteur->setIdEnvoye($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdRecepeteur(Message $idRecepeteur): self
+    {
+        if ($this->id_recepeteur->contains($idRecepeteur)) {
+            $this->id_recepeteur->removeElement($idRecepeteur);
+            // set the owning side to null (unless already changed)
+            if ($idRecepeteur->getIdEnvoye() === $this) {
+                $idRecepeteur->setIdEnvoye(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setIdRecepteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getIdRecepteur() === $this) {
+                $message->setIdRecepteur(null);
+            }
+        }
 
         return $this;
     }

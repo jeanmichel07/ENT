@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+    <h3 class="text-success" align="center">Liste des Poste</h3>
+    <a type="submit" href="{{ path('poste_new') }}" class="btn btn-success">Nouveau</a>
+    <table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Action</th>
+    </tr>
+    {% for p in poste %}
+    </thead>
+    <tbody>
+    <tr class="table-active">
+        <td >{{ p.nomPoste }}</td>
+        <td> <a type="submit" href="{{ path('poste_edit',{id:p.id}) }}" class="btn btn-success">Modifier</a>
+    </tr>
+    {% endfor %}
+{% endblock %}
