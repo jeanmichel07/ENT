@@ -2,37 +2,254 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}nl_ent|acceuil{% endblock %}</title>
+        <title>{% block title %}nl_ent|Dirigeant{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
     </head>
+    <style>
+        @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body{font-family: 'Poppins', sans-serif;
+    background: #fafafa}
+p{font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color:#999;
+}
+a, 
+a:hover, 
+a:focus{
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.navbar{
+    padding: 15px 10px;
+    background:#fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.1); 
+}
+
+.navbar-btn{
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line{
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0px;
+}
+
+.wrapper{
+    width: 250px;
+    }
+.wrapper{
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+#sidebar{
+    min-width: 250px;
+    max-width: 250px;
+    background:#3b91b2;
+    color: #fff;
+    transition: all 0.3s;
+}
+#sidebar.active{
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header{
+    padding: 20px;
+    background:#000;
+}
+#sidebar ul.components{
+    padding: 20px 0px;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p{
+    padding: 10px;
+    font-size: 1.9em;
+    display: block;
+
+}
+#sidebar ul li span{
+    margin-right:15px;
+}
+#sidebar ul li a{
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover{
+    color: #3b91b2;
+    background:#fff;
+}
+#sidebar ul li.active>a, 
+a[aria-expanded="true"]{
+    color: #fff;
+    background:#000;
+}
+a[data-toggle="collapse"]{
+    position: relative;
+}
+.dropdown-toggle:after{
+    display: : block;
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a{
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background:#3b91b2;
+}
+
+ul.CTAs{
+    padding: 20px;
+}
+
+ul.CTAs a{
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.download{
+    background: #fff;
+    color: #3b91b2; 
+}
+.article{
+    background:#000;
+    color: #fff;
+}
+
+#content{
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+@media(maz-width: 768px){
+    #sidebar{margin-left: -250px;}
+    #sidebar .active{
+        margin-left: 0px;
+    }
+    #sidebatCollapse span{
+        display: none;
+    }
+}
+
+
+
+    </style>
     <body>
     {% if app.session.get('username_dirigeant') %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Dirigeant</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="wrapper">
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3 style="text-align: center;">DIRIGEANT</h3>
+                </div>
 
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+
+
+                <ul class="list-unstyled components">
+                    <p style="color:#fff;">NL Technologie</p>
+                    <li class="active">
+                        <a href="#"><span class="fa fa-users"></span>Employé</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Employés</a>
+                    <li>
+                        <a href="#homeSubmenu" data-toggle=collapse aria-expanded="false" class="dropdown-toggle"><span class="fa fa-list-alt"></span>Présence</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#"><span class="fa fa-line-chart"></span>Administratif</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-code"></span>Dev</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-shopping-cart"></span>Boutique</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-code-fork"></span>Cyber&Multi-service</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Discussion</a>
+
+                    <li>
+                        <a href="#rapportSubmenu" data-toggle=collapse aria-expanded="false" class="dropdown-toggle"><span class="fa fa-book fa-fw"></span>Rapport</a>
+                        <ul class="collapse list-unstyled" id="rapportSubmenu">
+                            <li>
+                                <a href="#"><span class="fa fa-bar-chart"></span>Journalier</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-pie-chart"></span>Mensuel</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Congés</a>
+
+                    <li>
+                        <a href="#congeSubmenu" data-toggle=collapse aria-expanded="false" class="dropdown-toggle"><span class="fa fa-calendar"></span>Congé</a>
+                        <ul class="collapse list-unstyled" id="congeSubmenu">
+                            <li>
+                                <a href="#"><span class="fa fa-calendar-plus-o"></span>Demande de Congé</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-calendar-check-o"></span>Liste des vongés</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#discSubmenu" data-toggle=collapse aria-expanded="false" class="dropdown-toggle"><span class="fa fa-comments-o"></span>Discussion</a>
+                        <ul class="collapse list-unstyled" id="discSubmenu">
+                            <li>
+                                <a href="#"><span class="fa fa-commenting-o"></span>Discussion de groupe</a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-comment-o"></span>Créer un groupe</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-                <a href="{{ path('logout') }}" class="btn btn-secondary">Deconnexion ({{ app.session.get('username_dirigeant') }})</a>
+
+                <ul class="list-unstyled CTAs" style="text-align: center; font-size: 20px">
+                    <li>
+                        <a href="#" class="download"><span class="fa fa-cog fa-fw"></span>Paramètre</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('logout') }}" class="article"><span class="fa fa-power-off"></span>Deconnexion</a>
+                    </li>
+                </ul>
+            </nav>  
+
+            <div class="content">
+                <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="margin-left: 10px;">
+                        <i class="fa fa-align-justify"></i><span>MENU</span>
+                    </button>   
+
+                    <!--<a class="navbar-brand" href="#">Navbar</a> -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>       
+                </nav>      
+                <div class="line">      
+                </div>
             </div>
-        </nav>
+        </div>
         <div class="container">
             <div class="div1">
                 {% block body %}
@@ -76,5 +293,18 @@
     {% endif %}
 
         {% block javascripts %}{% endblock %}
+         <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $('#sidebarCollapse').on('click',function(){
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
     </body>
 </html>
